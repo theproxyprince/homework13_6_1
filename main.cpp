@@ -2,17 +2,37 @@
 #include <vector>
 
 int main() {
-    std::cout << "Введите размер вектора: ";
+    bool fail = false;
     int s;
-    std::cin >> s;
+    do {
+        fail = false;
+        std::cout << "Введите размер вектора: ";
+        std::cin >> s;
+        if (s <= 0 || std::cin.fail()) {
+            std::cout << "*** Введено некорректное значение. Повторите ввод." << std::endl;
+            fail = true;
+        }
+        std::cin.clear();
+        std::cin.ignore();
+    } while (fail);
+
     std::vector<int> vec1(s);
-    for (int i = 0; i < s; i++) {
-        int number;
-        std::cin >> number;
-        vec1[i] = number;
+    for (unsigned int i = 0; i < vec1.size(); i++) {
+        do {
+            fail = false;
+            std::cout << "Введите значение для элемента массива " << i << ": ";
+            std::cin >> vec1[i];
+            if (std::cin.fail()) {
+                std::cout << "*** Введено некорректное значение. Повторите ввод." << std::endl;
+                fail = true;
+            }
+            std::cin.clear();
+            std::cin.ignore();
+        } while (fail);
+
     }
 
-    std::cout << "\nВведите число которое надо удалить: ";
+    std::cout << "Введите число которое надо удалить: ";
     int num;
     std::cin >> num;
 
